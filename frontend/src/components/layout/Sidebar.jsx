@@ -28,31 +28,37 @@ const Sidebar = ({ setCurrentPage, onLogout }) => {
       className="border-r border-gray-200 h-screen flex flex-col p-4 shadow-lg backdrop-blur-2xl z-10 sticky top-0"
       initial={{ width: "250px" }}
       animate={{ width: isOpen ? "250px" : "90px" }}
-      transition={{ type: "spring" }}
+      transition={{
+        type: "spring",
+        stiffness: 400,
+        damping: 25,
+      }}
     >
       <div className="flex items-center justify-between mb-8 px-2 w-full overflow-hidden">
         <motion.h1
-          initial={{ opacity: 1 }}
-          animate={{ opacity: isOpen ? 1 : 0 }}
-          className={`text-3xl font-black flex  ${isOpen ? "w-full" : "w-0"}`}
+          initial={{ opacity: 1, x: 0 }}
+          animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : -100 }}
+          className={`text-3xl font-black flex  ${
+            isOpen ? "w-full" : "w-0"
+          } transition-all duration-100 ease-out`}
         >
           <span className="font-space font-bold text-4xl">Crypto</span>
           <span className="text-blue-600 font-space text-4xl">Fi</span>
         </motion.h1>
         <div
-          className={`absolute transition-all ${
-            isOpen ? "right-5" : "left-6.5"
+          className={`absolute shrink-0 transition-all ${
+            isOpen ? "right-5" : "left-8"
           } `}
         >
           {isOpen ? (
             <ChevronLeftCircle
               onClick={handleClose}
-              className="w-6 h-6 text-gray-600 hover:text-black bg-gray-100 rounded-sm hover:bg-gray-300 cursor-pointer "
+              className="w-7 h-7 text-gray-600 hover:text-black shrink-0 rounded-sm  cursor-pointer"
             />
           ) : (
             <ChevronRightCircle
               onClick={handleClose}
-              className="w-6 h-6 text-gray-600 hover:text-black bg-gray-100 rounded-sm hover:bg-gray-300 cursor-pointer"
+              className="w-7 h-7 text-gray-600 hover:text-black  cursor-pointer"
             />
           )}
         </div>
@@ -63,45 +69,35 @@ const Sidebar = ({ setCurrentPage, onLogout }) => {
           <NeoButton
             key={item.page}
             onClick={() => setCurrentPage(item.page)}
-            className={`w-full ${isOpen ? "justify-start" : "justify-center"}`}
+            className={`w-full  overflow-hidden ${
+              isOpen ? "justify-start" : ""
+            }`}
             variant="secondary"
           >
             <item.icon
-              className={`w-7 h-7 transition-all duration-200 ${
-                isOpen ? "" : "hidden"
-              }`}
+              className={`w-7 h-7 shrink-0 transition-all duration-200`}
             />
-            <item.icon
-              className={`w-7 h-7 transition-all duration-200 ${
-                isOpen ? "hidden" : ""
-              }`}
-            />
-            <motion.span
-              initial={{ opacity: 1 }}
-              animate={{
-                opacity: isOpen ? 1 : 0,
-                display: isOpen ? "block" : "none",
-              }}
-              className="ml-2"
+            <span
+              className={`${
+                isOpen ? "" : "hidden w-0"
+              } ml-2 transition-all duration-150`}
             >
               {item.name}
-            </motion.span>
+            </span>
           </NeoButton>
         ))}
       </div>
 
       <div className="mt-auto flex flex-col gap-4">
         <div
-          className={`flex items-center gap-3 mb-4 ${
-            isOpen ? "px-2" : "justify-center"
-          }`}
+          className={`flex items-center gap-3 mb-4 ${isOpen ? "px-2" : "px-2"}`}
         >
-          <div className="w-10 h-10 rounded-3xl border-2 flex items-center justify-center font-bold text-lg bg-gray-100 border-gray-300">
+          <div className="w-10 h-10 rounded-3xl border-2 flex items-center justify-center font-bold text-lg bg-gray-100 shrink-0 border-gray-300">
             HJ
           </div>
 
           {isOpen && (
-            <div>
+            <div className="shrink-0">
               <p className="font-bold">Hemraj Jadhav</p>
               <p className="text-xs text-gray-500">Investor</p>
             </div>
@@ -110,20 +106,11 @@ const Sidebar = ({ setCurrentPage, onLogout }) => {
 
         <NeoButton
           onClick={onLogout}
-          className={`w-full ${isOpen ? "justify-start" : "justify-center"}`}
+          className={`w-full flex ${isOpen ? "justify-start" : ""}`}
           variant="secondary"
         >
-          <LogOut className="w-6 h-6" />
-          <motion.span
-            initial={{ opacity: 1 }}
-            animate={{
-              opacity: isOpen ? 1 : 0,
-              display: isOpen ? "block" : "none",
-            }}
-            className="ml-2"
-          >
-            Logout
-          </motion.span>
+          <LogOut className="w-6 h-6 shrink-0" />
+          <span className={`ml-2 ${isOpen ? "" : "hidden w-0"}`}>Logout</span>
         </NeoButton>
       </div>
     </motion.nav>

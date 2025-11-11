@@ -11,10 +11,14 @@ const NeoButton = ({
   isOpen,
 }) => {
   const colorClasses = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white",
-    secondary: "bg-gray-100 hover:bg-gray-200 text-gray-800",
-    danger: "bg-red-600 hover:bg-red-700 text-white",
-    connect: "bg-blue-600 hover:bg-blue-700 text-white",
+    primary:
+      "bg-blue-600 hover:bg-blue-700 text-white shadow-[inset_0px_2px_2px_#5796fa]",
+    secondary:
+      "bg-gray-200 backdrop-blur-xl shadow-[inset_0px_2px_2px_#ffffff] hover:bg-gray-200 text-gray-800",
+    danger:
+      "bg-red-600 hover:bg-red-700 text-white shadow-[inset_0px_2px_2px_#a61c2f]",
+    connect:
+      "bg-blue-600 hover:bg-blue-700 text-white shadow-[inset_0px_2px_2px_#5796fa]",
   };
 
   return (
@@ -23,7 +27,7 @@ const NeoButton = ({
       whileTap={{ scale: 0.99 }}
       onClick={onClick}
       type={type}
-      className={`font-bold  border border-transparent p-3 rounded-lg shadow-md hover:shadow-sm active:shadow-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer ${
+      className={`font-bold  border border-transparent p-3 rounded-lg  hover:shadow-sm active:shadow-sm transition-all duration-200 flex items-center  gap-2 cursor-pointer ${
         colorClasses[variant]
       } ${fullWidth ? "w-full" : ""} ${className}`}
     >
